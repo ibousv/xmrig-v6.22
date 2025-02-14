@@ -1,18 +1,13 @@
 [Unit]
-Description=XMRig Mining Service
+Description=XMRig Mining Service for ec2-user
 After=network.target
 
 [Service]
-Type=simple
-Restart=always
-RestartSec=5s
-User=miner
-Group=miner
-LimitNOFILE=65535
-ExecStart=/usr/local/bin/xmrig -c /etc/xmrig/config.json
-StandardOutput=journal
-StandardError=journal
-SyslogIdentifier=xmrig
+User=ec2-user
+Group=ec2-user
+ExecStart=/home/ec2-user/xmrig/xmrig -c /home/ec2-user/xmrig/config.json --log-file=/var/log/user.log --no-color --background=false --syslog=false --watch=true 
+Restart=always  
+RestartSec=5s  
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=multi-user.target  
